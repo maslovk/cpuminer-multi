@@ -357,7 +357,8 @@ static const sph_u64 RC[] = {
 
 #define DECL64(x)        sph_u64 x
 #define MOV64(d, s)      (d = s)
-#define XOR64(d, a, b)   (d = a ^ b)
+//#define XOR64(d, a, b)   (d = a ^ b)
+#define XOR64(d, a, b)   (d = int_xor64(a,b))
 #define AND64(d, a, b)   (d = a & b)
 #define OR64(d, a, b)    (d = a | b)
 #define NOT64(d, s)      (d = SPH_T64(~s))
@@ -1705,6 +1706,14 @@ DEFCLOSE(28, 144)
 DEFCLOSE(32, 136)
 DEFCLOSE(48, 104)
 DEFCLOSE(64, 72)
+
+/*Internal functions*/
+/*Created for easier profiling*/
+
+static sph_u64 int_xor64(sph_u64 a,sph_u64 b)
+{
+	return a^b;
+}
 
 /* see sph_keccak.h */
 void
