@@ -63,6 +63,8 @@ extern "C"{
  */
 #define SPH_SIZE_keccak512   512
 
+static sph_u64 internal_xor64(sph_u64 a,sph_u64 b);
+
 /**
  * This structure is a context for Keccak computations: it contains the
  * intermediate values and some data from the last entered block. Once a
