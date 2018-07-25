@@ -959,67 +959,14 @@ static const struct {
 
 #endif
 
-/*
-#define TH_ELT(t, c0, c1, c2, c3, c4, d0, d1, d2, d3, d4)   do { \
-		DECL64(tt0); \
-		DECL64(tt1); \
-		DECL64(tt2); \
-		DECL64(tt3); \
-		XOR64(tt0, d0, d1); \
-		XOR64(tt1, d2, d3); \
-		XOR64(tt0, tt0, d4); \
-		XOR64(tt0, tt0, tt1); \
-		ROL64(tt0, tt0, 1); \
-		XOR64(tt2, c0, c1); \
-		XOR64(tt3, c2, c3); \
-		XOR64(tt0, tt0, c4); \
-		XOR64(tt2, tt2, tt3); \
-		XOR64(t, tt0, tt2); \
-	} while (0)
-*/
-
 #define TH_ELT(t, c0, c1, c2, c3, c4, d0, d1, d2, d3, d4)	internal_th_elt(t, c0, c1, c2, c3, c4, d0, d1, d2, d3, d4)
 
 #define THETA(b00, b01, b02, b03, b04, b10, b11, b12, b13, b14, \
 	b20, b21, b22, b23, b24, b30, b31, b32, b33, b34, \
 	b40, b41, b42, b43, b44) \
-	do { \
-		DECL64(t0); \
-		DECL64(t1); \
-		DECL64(t2); \
-		DECL64(t3); \
-		DECL64(t4); \
-		TH_ELT(t0, b40, b41, b42, b43, b44, b10, b11, b12, b13, b14); \
-		TH_ELT(t1, b00, b01, b02, b03, b04, b20, b21, b22, b23, b24); \
-		TH_ELT(t2, b10, b11, b12, b13, b14, b30, b31, b32, b33, b34); \
-		TH_ELT(t3, b20, b21, b22, b23, b24, b40, b41, b42, b43, b44); \
-		TH_ELT(t4, b30, b31, b32, b33, b34, b00, b01, b02, b03, b04); \
-		XOR64(b00, b00, t0); \
-		XOR64(b01, b01, t0); \
-		XOR64(b02, b02, t0); \
-		XOR64(b03, b03, t0); \
-		XOR64(b04, b04, t0); \
-		XOR64(b10, b10, t1); \
-		XOR64(b11, b11, t1); \
-		XOR64(b12, b12, t1); \
-		XOR64(b13, b13, t1); \
-		XOR64(b14, b14, t1); \
-		XOR64(b20, b20, t2); \
-		XOR64(b21, b21, t2); \
-		XOR64(b22, b22, t2); \
-		XOR64(b23, b23, t2); \
-		XOR64(b24, b24, t2); \
-		XOR64(b30, b30, t3); \
-		XOR64(b31, b31, t3); \
-		XOR64(b32, b32, t3); \
-		XOR64(b33, b33, t3); \
-		XOR64(b34, b34, t3); \
-		XOR64(b40, b40, t4); \
-		XOR64(b41, b41, t4); \
-		XOR64(b42, b42, t4); \
-		XOR64(b43, b43, t4); \
-		XOR64(b44, b44, t4); \
-	} while (0)
+	internal_theta(b00, b01, b02, b03, b04, b10, b11, b12, b13, b14, \
+	b20, b21, b22, b23, b24, b30, b31, b32, b33, b34, \
+	b40, b41, b42, b43, b44)
 
 #define RHO(b00, b01, b02, b03, b04, b10, b11, b12, b13, b14, \
 	b20, b21, b22, b23, b24, b30, b31, b32, b33, b34, \
@@ -1735,6 +1682,49 @@ static sph_u64 internal_xor64(sph_u64 a,sph_u64 b)
 static sph_u64 internal_mov64(sph_u64 a)
 {
 	return a;
+}
+
+static void internal_theta(sph_u64 b00,sph_u64 b01,sph_u64 b02,sph_u64 b03,sph_u64 b04,
+			sph_u64 b10,sph_u64 b11,sph_u64 b12,sph_u64 b13,sph_u64 b14,
+			sph_u64 b20,sph_u64 b21,sph_u64 b22,sph_u64 b23,sph_u64 b24,
+			sph_u64 b30,sph_u64 b31,sph_u64 b32,sph_u64 b33,sph_u64 b34,
+			sph_u64 b40,sph_u64 b41,sph_u64 b42,sph_u64 b43,sph_u64 b44)
+{
+		DECL64(t0);
+		DECL64(t1);
+		DECL64(t2);
+		DECL64(t3);
+		DECL64(t4);
+		TH_ELT(t0, b40, b41, b42, b43, b44, b10, b11, b12, b13, b14);
+		TH_ELT(t1, b00, b01, b02, b03, b04, b20, b21, b22, b23, b24);
+		TH_ELT(t2, b10, b11, b12, b13, b14, b30, b31, b32, b33, b34);
+		TH_ELT(t3, b20, b21, b22, b23, b24, b40, b41, b42, b43, b44);
+		TH_ELT(t4, b30, b31, b32, b33, b34, b00, b01, b02, b03, b04);
+		XOR64(b00, b00, t0);
+		XOR64(b01, b01, t0);
+		XOR64(b02, b02, t0);
+		XOR64(b03, b03, t0);
+		XOR64(b04, b04, t0);
+		XOR64(b10, b10, t1);
+		XOR64(b11, b11, t1);
+		XOR64(b12, b12, t1);
+		XOR64(b13, b13, t1);
+		XOR64(b14, b14, t1);
+		XOR64(b20, b20, t2);
+		XOR64(b21, b21, t2);
+		XOR64(b22, b22, t2);
+		XOR64(b23, b23, t2);
+		XOR64(b24, b24, t2);
+		XOR64(b30, b30, t3);
+		XOR64(b31, b31, t3);
+		XOR64(b32, b32, t3);
+		XOR64(b33, b33, t3);
+		XOR64(b34, b34, t3);
+		XOR64(b40, b40, t4);
+		XOR64(b41, b41, t4);
+		XOR64(b42, b42, t4);
+		XOR64(b43, b43, t4);
+		XOR64(b44, b44, t4);
 }
 
 static void internal_th_elt(sph_u64 t,sph_u64 c0,sph_u64 c1,sph_u64 c2,sph_u64 c3,sph_u64 c4,sph_u64 d0,sph_u64 d1,sph_u64 d2,sph_u64 d3,sph_u64 d4)
