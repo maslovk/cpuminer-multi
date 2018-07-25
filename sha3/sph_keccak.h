@@ -81,6 +81,12 @@ static void internal_theta(sph_u64 b00,sph_u64 b01,sph_u64 b02,sph_u64 b03,sph_u
 			sph_u64 b30,sph_u64 b31,sph_u64 b32,sph_u64 b33,sph_u64 b34,
 			sph_u64 b40,sph_u64 b41,sph_u64 b42,sph_u64 b43,sph_u64 b44);
 
+static void internal_rho(sph_u64 b00,sph_u64 b01,sph_u64 b02,sph_u64 b03,sph_u64 b04,
+			sph_u64 b10,sph_u64 b11,sph_u64 b12,sph_u64 b13,sph_u64 b14,
+			sph_u64 b20,sph_u64 b21,sph_u64 b22,sph_u64 b23,sph_u64 b24,
+			sph_u64 b30,sph_u64 b31,sph_u64 b32,sph_u64 b33,sph_u64 b34,
+			sph_u64 b40,sph_u64 b41,sph_u64 b42,sph_u64 b43,sph_u64 b44);
+
 /**
  * This structure is a context for Keccak computations: it contains the
  * intermediate values and some data from the last entered block. Once a

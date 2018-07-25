@@ -971,33 +971,10 @@ static const struct {
 #define RHO(b00, b01, b02, b03, b04, b10, b11, b12, b13, b14, \
 	b20, b21, b22, b23, b24, b30, b31, b32, b33, b34, \
 	b40, b41, b42, b43, b44) \
-	do { \
-		/* ROL64(b00, b00,  0); */ \
-		ROL64(b01, b01, 36); \
-		ROL64(b02, b02,  3); \
-		ROL64(b03, b03, 41); \
-		ROL64(b04, b04, 18); \
-		ROL64(b10, b10,  1); \
-		ROL64(b11, b11, 44); \
-		ROL64(b12, b12, 10); \
-		ROL64(b13, b13, 45); \
-		ROL64(b14, b14,  2); \
-		ROL64(b20, b20, 62); \
-		ROL64(b21, b21,  6); \
-		ROL64(b22, b22, 43); \
-		ROL64(b23, b23, 15); \
-		ROL64(b24, b24, 61); \
-		ROL64(b30, b30, 28); \
-		ROL64(b31, b31, 55); \
-		ROL64(b32, b32, 25); \
-		ROL64(b33, b33, 21); \
-		ROL64(b34, b34, 56); \
-		ROL64(b40, b40, 27); \
-		ROL64(b41, b41, 20); \
-		ROL64(b42, b42, 39); \
-		ROL64(b43, b43,  8); \
-		ROL64(b44, b44, 14); \
-	} while (0)
+	internal_rho(b00, b01, b02, b03, b04, b10, b11, b12, b13, b14, \
+	b20, b21, b22, b23, b24, b30, b31, b32, b33, b34, \
+	b40, b41, b42, b43, b44)
+	
 
 /*
  * The KHI macro integrates the "lane complement" optimization. On input,
@@ -1683,6 +1660,41 @@ static sph_u64 internal_mov64(sph_u64 a)
 {
 	return a;
 }
+
+static void internal_rho(sph_u64 b00,sph_u64 b01,sph_u64 b02,sph_u64 b03,sph_u64 b04,
+			sph_u64 b10,sph_u64 b11,sph_u64 b12,sph_u64 b13,sph_u64 b14,
+			sph_u64 b20,sph_u64 b21,sph_u64 b22,sph_u64 b23,sph_u64 b24,
+			sph_u64 b30,sph_u64 b31,sph_u64 b32,sph_u64 b33,sph_u64 b34,
+			sph_u64 b40,sph_u64 b41,sph_u64 b42,sph_u64 b43,sph_u64 b44)
+{
+		/* ROL64(b00, b00,  0); */
+		ROL64(b01, b01, 36);
+		ROL64(b02, b02,  3);
+		ROL64(b03, b03, 41);
+		ROL64(b04, b04, 18);
+		ROL64(b10, b10,  1);
+		ROL64(b11, b11, 44);
+		ROL64(b12, b12, 10);
+		ROL64(b13, b13, 45);
+		ROL64(b14, b14,  2);
+		ROL64(b20, b20, 62);
+		ROL64(b21, b21,  6);
+		ROL64(b22, b22, 43);
+		ROL64(b23, b23, 15);
+		ROL64(b24, b24, 61);
+		ROL64(b30, b30, 28);
+		ROL64(b31, b31, 55);
+		ROL64(b32, b32, 25);
+		ROL64(b33, b33, 21);
+		ROL64(b34, b34, 56);
+		ROL64(b40, b40, 27);
+		ROL64(b41, b41, 20);
+		ROL64(b42, b42, 39);
+		ROL64(b43, b43,  8);
+		ROL64(b44, b44, 14);
+}
+
+
 
 static void internal_theta(sph_u64 b00,sph_u64 b01,sph_u64 b02,sph_u64 b03,sph_u64 b04,
 			sph_u64 b10,sph_u64 b11,sph_u64 b12,sph_u64 b13,sph_u64 b14,
