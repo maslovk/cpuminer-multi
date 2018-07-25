@@ -69,6 +69,8 @@ static sph_u64 internal_or64(sph_u64 a,sph_u64 b);
 
 static sph_u64 internal_xor64(sph_u64 a,sph_u64 b);
 
+static sph_u64 internal_rol64(sph_u64 a,sph_u64 b);
+
 static sph_u64 internal_mov64(sph_u64 a);
 
 static void internal_th_elt(sph_u64 t,sph_u64 c0,sph_u64 c1,sph_u64 c2,sph_u64 c3,

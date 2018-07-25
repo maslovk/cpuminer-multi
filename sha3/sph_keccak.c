@@ -365,7 +365,8 @@ static const sph_u64 RC[] = {
 //#define OR64(d, a, b)    (d = a | b)
 #define OR64(d, a, b)    (d = internal_or64(a,b))
 #define NOT64(d, s)      (d = SPH_T64(~s))
-#define ROL64(d, v, n)   (d = SPH_ROTL64(v, n))
+//#define ROL64(d, v, n)   (d = SPH_ROTL64(v, n))
+#define ROL64(d, v, n)   (d = internal_rol64(v, n))
 #define XOR64_IOTA       XOR64
 
 #else
@@ -1661,6 +1662,11 @@ static sph_u64 internal_mov64(sph_u64 a)
 	return a;
 }
 
+static sph_u64 internal_rol64(sph_u64 a,sph_u64 b)
+{
+	return SPH_ROTL64(a, b);
+}
+
 static void internal_rho(sph_u64 b00,sph_u64 b01,sph_u64 b02,sph_u64 b03,sph_u64 b04,
 			sph_u64 b10,sph_u64 b11,sph_u64 b12,sph_u64 b13,sph_u64 b14,
 			sph_u64 b20,sph_u64 b21,sph_u64 b22,sph_u64 b23,sph_u64 b24,
@@ -1755,7 +1761,6 @@ static void internal_th_elt(sph_u64 t,sph_u64 c0,sph_u64 c1,sph_u64 c2,sph_u64 c
 	XOR64(tt0, tt0, c4);
 	XOR64(tt2, tt2, tt3);
 	XOR64(t, tt0, tt2);
-	
 }
 
 /* see sph_keccak.h */
